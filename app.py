@@ -304,4 +304,4 @@ def goal_tracking():
 if __name__ == '__main__':
     if not gemini_api_key:
         raise ValueError("Please set the GOOGLE_API_KEY environment variable")
-    app.run(debug=True)
+    app.run(debug=False)
