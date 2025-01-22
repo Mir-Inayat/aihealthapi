@@ -2,12 +2,15 @@ from flask import Flask, request, jsonify
 import google.generativeai as genai
 import os
 import tempfile
+import toml
 
 app = Flask(__name__)
 
 # Configure Gemini API
-GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
-genai.configure(api_key=GOOGLE_API_KEY)
+config = toml.load("config.toml")
+
+gemini_api_key = config['env']['GEMINI_API_KEY']
+print(gemini_api_key)
 
 # System instruction for the model
 instruction = """
