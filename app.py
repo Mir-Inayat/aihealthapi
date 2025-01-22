@@ -302,6 +302,6 @@ def goal_tracking():
     return jsonify({"status": "success", "feedback": response})
 
 if __name__ == '__main__':
-    if not GOOGLE_API_KEY:
+    if not gemini_api_key:
         raise ValueError("Please set the GOOGLE_API_KEY environment variable")
     app.run(debug=True)
