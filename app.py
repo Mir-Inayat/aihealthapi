@@ -2,15 +2,14 @@ from flask import Flask, request, jsonify
 import google.generativeai as genai
 import os
 import tempfile
-import toml
+import streamlit as st
 
 app = Flask(__name__)
 
-# Configure Gemini API
-config = toml.load("config.toml")
-
-gemini_api_key = config['env']['GEMINI_API_KEY']
-print(gemini_api_key)
+# Access secrets
+gemini_api_key = st.secrets["GEMINI_API_KEY"]
+genai.configure(api_key=gemini_api_key)
+st.write(f"Using API Key: {gemini_api_key[:4]}****")
 
 # System instruction for the model
 instruction = """
