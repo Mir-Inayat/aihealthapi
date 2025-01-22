@@ -2,14 +2,12 @@ from flask import Flask, request, jsonify
 import google.generativeai as genai
 import os
 import tempfile
-import streamlit as st
 
 app = Flask(__name__)
 
-# Access secrets
-gemini_api_key = st.secrets["GEMINI_API_KEY"]
-genai.configure(api_key=gemini_api_key)
-st.write(f"Using API Key: {gemini_api_key[:4]}****")
+# Configure Gemini API
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+genai.configure(api_key=GOOGLE_API_KEY)
 
 # System instruction for the model
 instruction = """
@@ -302,6 +300,6 @@ def goal_tracking():
     return jsonify({"status": "success", "feedback": response})
 
 if __name__ == '__main__':
-    if not gemini_api_key:
+    if not GOOGLE_API_KEY:
         raise ValueError("Please set the GOOGLE_API_KEY environment variable")
-    app.run(debug=False, port=8000)
+    app.run(debug=True)
